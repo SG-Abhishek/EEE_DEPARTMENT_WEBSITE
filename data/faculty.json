@@ -1,0 +1,114 @@
+[
+  {
+    "id": "mini-v",
+    "name": "Dr. MINI V",
+    "role": "PROFESSOR",
+    "isHod": true,
+    "email": "hodeee@gecskp.ac.in",
+    "image": "/images/hod.jpg"
+  },
+  {
+    "id": "vinitha-c",
+    "name": "Dr. VINITHA CHELLAPPAN",
+    "role": "PROFESSOR",
+    "isHod": false,
+    "email": "vinitac@gecskp.ac.in",
+    "image": "/images/vinitha.webp"
+  },
+  {
+    "id": "haryhar-as",
+    "name": "HARYHAR A S",
+    "role": "ASSOCIATE PROFESSOR (CAS)",
+    "isHod": false,
+    "email": "haryhar@gecskp.ac.in",
+    "image": "/images/haryhar.png"
+  },
+  {
+    "id": "abdul-kareem",
+    "name": "ABDUL KAREEM PUTHIYA VEETTIL",
+    "role": "ASSISTANT PROFESSOR",
+    "isHod": false,
+    "email": "kareempv@gmail.com",
+    "image": "/images/kareem.webp"
+  },
+  {
+    "id": "muhammedali-s",
+    "name": "MUHAMMEDALI SHAFEEQUE K",
+    "role": "ASSISTANT PROFESSOR",
+    "isHod": false,
+    "email": "shafeeq@gecskp.ac.in",
+    "image": "/images/shafeeque.jpg"
+  },
+  {
+    "id": "joseph-p",
+    "name": "JOSEPH PETER",
+    "role": "ASSISTANT PROFESSOR",
+    "isHod": false,
+    "email": "josephedatt@gmail.com",
+    "image": "/images/joseph.webp"
+  },
+  {
+    "id": "hanan-ca",
+    "name": "HANAN CA",
+    "role": "ASSISTANT PROFESSOR",
+    "isHod": false,
+    "email": "hananca786@gmail.com",
+    "image": "/images/hanan.webp"
+  },
+  {
+    "id": "ambili-pm",
+    "name": "AMBILI P M",
+    "role": "ASSISTANT PROFESSOR",
+    "isHod": false,
+    "email": "ambilipm@gecskp.ac.in",
+    "image": "/images/ambili.jpg"
+  },
+  {
+    "id": "jithin-k",
+    "name": "JITHIN KUMAR I J",
+    "role": "ASSISTANT PROFESSOR (CONTRACT)",
+    "isHod": false,
+    "email": "jithinkumar713@gmail.com",
+    "image": "/images/jithin.webp"
+  },
+  {
+    "id": "nimisha-k",
+    "name": "NIMISHA K",
+    "role": "ASSISTANT PROFESSOR",
+    "isHod": false,
+    "email": "nimishak@gecskp.ac.in",
+    "image": "/images/nimisha.webp"
+  },
+  {
+    "id": "sruthi-v",
+    "name": "SRUTHI V",
+    "role": "ASSISTANT PROFESSOR (CONTRACT)",
+    "isHod": false,
+    "email": "sruthiv800@gmail.com",
+    "image": "/images/sruthi.webp"
+  },
+  {
+    "id": "amritha-r",
+    "name": "AMRITHA R",
+    "role": "ASSISTANT PROFESSOR (CONTRACT)",
+    "isHod": false,
+    "email": "amrithavijay333@gmail.com",
+    "image": "/images/amritha.webp"
+  },
+  {
+    "id": "reshma-kk",
+    "name": "RESHMA KK",
+    "role": "ASSISTANT PROFESSOR (CONTRACT)",
+    "isHod": false,
+    "email": "reshmakk04@gmail.com",
+    "image": "/images/reshma.webp"
+  },
+  {
+    "id": "muhammed-haris",
+    "name": "MUHAMMED HARIS K",
+    "role": "ASSISTANT PROFESSOR (CONTRACT)",
+    "isHod": false,
+    "email": "mhariskilayil@gmail.com",
+    "image": "/images/haris.webp"
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "programs": [
+    { "id": "btech", "label": "B.Tech" },
+    { "id": "mtech", "label": "M.Tech" }
+  ],
+  "schemes": [
+    { "id": "2019", "label": "2019 Scheme" },
+    { "id": "2024", "label": "2024 Scheme" }
+  ],
+  "curriculums": [
+    {
+      "id": "all-years-2019",
+      "schemeId": "2019",
+      "tag": "2019 Scheme",
+      "title": "FULL 4-YEAR",
+      "highlight": "Curriculum",
+      "fileUrl": "/files/2019-full-curriculum.pdf"
+    },
+    {
+      "id": "first-year-2024",
+      "schemeId": "2024",
+      "tag": "2024 Scheme",
+      "title": "FIRST YEAR",
+      "highlight": "Curriculum",
+      "fileUrl": "/files/2024-first-year.pdf"
+    },
+    {
+      "id": "second-fourth-2024",
+      "schemeId": "2024",
+      "tag": "2024 Scheme",
+      "title": "2nd to 4th YEAR",
+      "highlight": "Curriculum",
+      "fileUrl": "/files/2024-second-fourth-year.pdf"
+    }
+  ]
+}
