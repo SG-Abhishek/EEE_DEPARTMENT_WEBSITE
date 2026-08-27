@@ -19,16 +19,16 @@ export default async function ProjectsPage() {
     <main className="main" style={{ paddingTop: '140px', paddingBottom: '80px', minHeight: '80vh' }}>
       <section className="section section-center">
         <div style={{ marginBottom: '60px', textAlign: 'center' }}>
-          <p className="section-tag">Innovation</p>
+          <p className="section-tag">Department Events</p>
           <h1 style={{ fontSize: '2.5rem', fontWeight: '800', letterSpacing: '2px', margin: '10px 0', color: '#3d424a' }}>
-            STUDENT PROJECTS
+            EVENTS
           </h1>
           <div style={{ width: '60px', height: '4px', backgroundColor: '#f39c12', margin: '0 auto', borderRadius: '2px' }}></div>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '25px' }}>
           {projects.length === 0 ? (
-            <p className="text-center" style={{ gridColumn: '1 / -1', color: '#888' }}>No projects added yet.</p>
+            <p className="text-center" style={{ gridColumn: '1 / -1', color: '#888' }}>No Events uploaded yet.</p>
           ) : (
             projects.map((item) => (
               <div key={item._id} className="scheme-detail-card" style={{ padding: '0', overflow: 'hidden' }}>
