@@ -127,7 +127,7 @@ export default function SyllabusPage() {
                     <p className="section-tag">{curr.tag}</p>
                     <h2 className="section-title">{curr.title} <br/><strong>{curr.highlight}</strong></h2>
                     <div className="detail-actions">
-                      <a href={curr.fileUrl} target="_blank" rel="noopener noreferrer" download className="btn-primary syllabus-download">
+                      <a href={curr.fileUrl}  rel="noopener noreferrer" download className="btn-primary syllabus-download">
                         DOWNLOAD PDF
                       </a>
                     </div>
