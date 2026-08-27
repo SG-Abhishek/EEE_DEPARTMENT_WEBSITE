@@ -29,7 +29,7 @@ export default async function FacultyPage() {
           <p className="section-tag">Mentors & Leadership</p>
           
           {/* Removed 'reveal reveal-d1' classes here */}
-          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', letterSpacing: '2px', margin: '10px 0', color: '#ffffff' }}>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', letterSpacing: '2px', margin: '10px 0', color: '#3d424a' }}>
             FACULTY MEMBERS
           </h1>
           

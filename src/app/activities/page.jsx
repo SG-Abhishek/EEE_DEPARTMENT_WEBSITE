@@ -21,7 +21,7 @@ export default async function ActivitiesPage() {
       <section className="section section-center">
         <div style={{ marginBottom: '60px', textAlign: 'center' }}>
           <p className="section-tag">Innovation</p>
-          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', letterSpacing: '2px', margin: '10px 0', color: '#ffffff' }}>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: '800', letterSpacing: '2px', margin: '10px 0', color: '#3d424a' }}>
             STUDENT PROJECTS
           </h1>
           <div style={{ width: '60px', height: '4px', backgroundColor: '#f39c12', margin: '0 auto', borderRadius: '2px' }}></div>
