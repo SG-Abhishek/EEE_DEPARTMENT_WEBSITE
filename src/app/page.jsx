@@ -212,17 +212,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-
-            <div className="pricing-card reveal reveal-d1">
-              <div className="pricing-badge">Popular</div>
-              <div className="pricing-tier">M.Tech</div>
-              <p className="pricing-desc">The M.Tech. programme in Electrical Drives and Control is designed to provide students with a thorough understanding of both theoretical and practical aspects of electrical drives and control systems. It aims to equip them with advanced skills required for pursuing research in the field, as well as for employment in industries related to power electronics, drive systems development, and industrial automation. Additionally, the programme prepares students for opportunities in the rapidly growing electric vehicle and energy sectors. Graduates are also well-positioned for academic careers, qualifying them for faculty positions at prestigious institutions.</p>
-              <div className="testimonial-card-details reveal reveal-d1">
-                <div className="testimonial-author">
-                  <p>MORE DETAILS</p>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -269,11 +258,11 @@ export default function Home() {
                   <div className="integration-name">SYLLABUS</div>
                 </Link>
 
-                <Link id="linkNotes" className="integration-item" href="/notes">
+                <Link id="linkNotes" className="integration-item" href="/pyqs">
                   <div className="integration-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M6 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M9 7h6M9 11h6M9 15h4"/><path d="M8 3v2"/></svg>
                   </div>
-                  <div className="integration-name">NOTES</div>
+                  <div className="integration-name">Previous year questions</div>
                 </Link>
 
                 <Link id="linkEvents" className="integration-item" href="/events">

@@ -1,8 +1,8 @@
 import { client } from '../../../sanity/lib/client';
 
 async function getNotes() {
-  // FILTERING MAGIC: Only pull documents where the category is "Notes"
-  const query = `*[_type == "academicDoc" && category == "Notes"] | order(semester asc) {
+  // FILTERING MAGIC: Only pull documents where the category is "pyqs"
+  const query = `*[_type == "academicDoc" && category == "pyqs"] | order(semester asc) {
     _id,
     title,
     semester,
@@ -21,7 +21,7 @@ export default async function NotesPage() {
         <div style={{ marginBottom: '60px', textAlign: 'center' }}>
           <p className="section-tag">Study Materials</p>
           <h1 style={{ fontSize: '2.5rem', fontWeight: '800', letterSpacing: '2px', margin: '10px 0', color: '#3d424a' }}>
-            NOTES
+            Previous Year Question Papers (PYQs)
           </h1>
           <div style={{ width: '60px', height: '4px', backgroundColor: '#f39c12', margin: '0 auto', borderRadius: '2px' }}></div>
         </div>
@@ -29,7 +29,7 @@ export default async function NotesPage() {
         <div className="scheme-panels" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
           {notes.length === 0 ? (
             <p className="text-center" style={{ gridColumn: '1 / -1', color: '#888' }}>
-              Notes will be uploaded soon. Please check back later!
+              PYQs will be uploaded soon. Please check back later!
             </p>
           ) : (
             notes.map((item) => (

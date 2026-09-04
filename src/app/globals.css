@@ -666,7 +666,7 @@ body.menu-open .top-nav { background: rgba(15,17,21,0.95); backdrop-filter: blur
 }
 .save-badge.show { opacity: 1; }
 
-.pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.pricing-grid { margin: 25;}
 .pricing-card {
   background: var(--panel-bg); border: 1px solid var(--panel-border); border-radius: 36px;
   padding: 44px 36px; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -888,7 +888,7 @@ body.menu-open .top-nav { background: rgba(15,17,21,0.95); backdrop-filter: blur
   #more .left, #more .right { width: 100%; }
   #more .left { width: 100%; align-items: center; }
   #more .left .integration-item-faculty { width: 100%; max-width: 100%; padding: 24px 18px; }
-  .integration-item-faculty img { width: 100%; max-width: 320px; height: auto; }
+  .integration-item-faculty img { width: 50%; max-width: 320px; height: auto; }
   .right .integrations-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .right .integrations-grid .integration-item { padding: 18px 14px; }
   .hero-grid { width: 100%; max-width: 100vw; background-size: 100px 100px; }
