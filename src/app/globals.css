@@ -1050,8 +1050,8 @@ body.syllabus-body { min-height: 100vh; height: auto; overflow-y: auto; }
   width: 100%;
   overflow: hidden;
   background-color: rgba(10, 15, 26, 0.6);
-  border-top: 1px solid rgba(243, 156, 18, 0.2);
-  border-bottom: 1px solid rgba(243, 156, 18, 0.2);
+  border-top: 1px solid rgba(151, 151, 151, 0.2);
+  border-bottom: 1px solid rgba(149, 149, 149, 0.2);
   padding: 12px 0;
   white-space: nowrap;
   position: relative;
@@ -1085,7 +1085,7 @@ body.syllabus-body { min-height: 100vh; height: auto; overflow-y: auto; }
 }
 
 .marquee-item a:hover {
-  color: #f39c12;
+  color: #292929;
   text-decoration: underline;
 }
 
@@ -1097,7 +1097,7 @@ body.syllabus-body { min-height: 100vh; height: auto; overflow-y: auto; }
 }
 
 .marquee-separator {
-  color: #f39c12;
+  color: #262626;
   margin: 0 25px;
   opacity: 0.6;
 }
@@ -1111,18 +1111,19 @@ body.syllabus-body { min-height: 100vh; height: auto; overflow-y: auto; }
 .marquee-container {
   width: 100%;
   overflow: hidden;
-  background-color: rgba(10, 15, 26, 0.8);
-  border-top: 1px solid rgba(243, 156, 18, 0.2);
-  border-bottom: 1px solid rgba(243, 156, 18, 0.2);
+  background-color: var(--panel-bg);
+  border-top: 1px solid var(--panel-border);
+  border-bottom: 1px solid var(--panel-border);
   padding: 12px 0;
   white-space: nowrap;
   position: relative;
   z-index: 20;
+  backdrop-filter: blur(16px);
 }
 
 .marquee-content {
   display: inline-block;
-  animation: scrollMarquee 20s linear infinite; 
+  animation: scrollMarquee 18s linear infinite; 
 }
 
 .marquee-container:hover .marquee-content {
@@ -1130,7 +1131,7 @@ body.syllabus-body { min-height: 100vh; height: auto; overflow-y: auto; }
 }
 
 .marquee-label {
-  color: #fff;
+  color: var(--ivory);
   font-weight: bold;
   letter-spacing: 2px;
   margin-right: 20px;
@@ -1138,25 +1139,25 @@ body.syllabus-body { min-height: 100vh; height: auto; overflow-y: auto; }
 }
 
 .marquee-item a {
-  color: #fff;
+  color: var(--ivory);
   text-decoration: none;
   font-size: 0.95rem;
   transition: color 0.2s ease;
 }
 
 .marquee-item a:hover {
-  color: #f39c12;
+  color: var(--slate-light);
   text-decoration: underline;
 }
 
 .marquee-category {
-  color: #888;
+  color: var(--slate-warm);
   font-size: 0.85rem;
   margin-right: 8px;
 }
 
 .marquee-separator {
-  color: #f39c12;
+  color: var(--silver);
   margin: 0 25px;
   opacity: 0.6;
 }
@@ -1171,17 +1172,16 @@ body.syllabus-body { min-height: 100vh; height: auto; overflow-y: auto; }
   position: relative;
   width: 100%;
   max-width: 600px;
-  aspect-ratio: 16 / 9; /* Widescreen TV format for desktop */
+  aspect-ratio: 16 / 9; 
   height: auto; 
   margin: 0 auto;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-  background-color: rgba(10, 15, 26, 0.8);
+  border: 1px solid var(--panel-border);
+  background-color: var(--panel-bg);
+  backdrop-filter: blur(16px);
 }
 
-/* Transforms the slideshow into a tall square on mobile so images aren't crushed */
 @media (max-width: 768px) {
   .slideshow-container {
     aspect-ratio: 1 / 1; 
@@ -1216,15 +1216,43 @@ body.syllabus-body { min-height: 100vh; height: auto; overflow-y: auto; }
   left: 0;
   width: 100%;
   padding: 40px 20px 20px;
-  background: linear-gradient(transparent, rgba(10, 15, 26, 0.95));
-  color: #fff;
+  background: linear-gradient(transparent, var(--base-deep));
+  color: var(--ivory);
   font-size: 1.1rem;
   font-weight: 500;
   text-align: center;
   letter-spacing: 1px;
 }
 
-/* --- Hide Slideshow Arrows on Mobile --- */
+/* --- Slideshow Arrows (Theme Aware) --- */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--panel-bg);
+  color: var(--ivory);
+  border: 1px solid var(--panel-border);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  backdrop-filter: blur(4px);
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.slider-arrow:hover {
+  background: var(--nav-bg);
+}
+
+.slider-arrow.left { left: 15px; }
+.slider-arrow.right { right: 15px; }
+
+/* Hide Slideshow Arrows on Mobile */
 @media (max-width: 768px) {
   .slider-arrow {
     display: none !important;

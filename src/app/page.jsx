@@ -269,32 +269,17 @@ export default function Home() {
 
               {gallery.length > 1 && (
                 <>
-                  {/* FIXED: Added 'slider-arrow' class so we can hide these on mobile */}
                   <button 
-                    className="slider-arrow"
+                    className="slider-arrow left"
                     onClick={prevSlide}
                     aria-label="Previous slide"
-                    style={{ 
-                      position: 'absolute', top: '50%', left: '15px', transform: 'translateY(-50%)', 
-                      background: 'rgba(10, 15, 26, 0.6)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', 
-                      borderRadius: '50%', width: '45px', height: '45px', cursor: 'pointer', zIndex: 10, 
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem',
-                      backdropFilter: 'blur(4px)'
-                    }}
                   >
                     &#10094;
                   </button>
                   <button 
-                    className="slider-arrow"
+                    className="slider-arrow right"
                     onClick={nextSlide}
                     aria-label="Next slide"
-                    style={{ 
-                      position: 'absolute', top: '50%', right: '15px', transform: 'translateY(-50%)', 
-                      background: 'rgba(10, 15, 26, 0.6)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', 
-                      borderRadius: '50%', width: '45px', height: '45px', cursor: 'pointer', zIndex: 10, 
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem',
-                      backdropFilter: 'blur(4px)'
-                    }}
                   >
                     &#10095;
                   </button>
