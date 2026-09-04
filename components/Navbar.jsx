@@ -56,6 +56,9 @@ export default function Navbar() {
     document.body.classList.remove('menu-open');
   };
 
+  // Hide the navbar completely if we are inside the Sanity Studio
+  if (pathname?.startsWith('/studio')) return null;
+
   return (
     <>
       <nav className={`top-nav ${isScrolled ? 'scrolled' : ''}`} id="topNav" style={{ zIndex: 9999 }}>

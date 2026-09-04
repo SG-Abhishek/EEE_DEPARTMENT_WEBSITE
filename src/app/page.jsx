@@ -1,11 +1,78 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { client } from '../../sanity/lib/client'; // Sanity client
+import { urlFor } from '../../sanity/lib/image'; // Sanity image builder
 
 export default function Home() {
-  
+  // 1. States for our dynamic features
+  const [announcements, setAnnouncements] = useState([]);
+  const [gallery, setGallery] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // ── NEW: Swipe Gesture States ──
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  // ── Manual Slideshow Controls ──
+  const nextSlide = () => {
+    if (gallery.length > 0) setCurrentSlide((prev) => (prev + 1) % gallery.length);
+  };
+
+  const prevSlide = () => {
+    if (gallery.length > 0) setCurrentSlide((prev) => (prev === 0 ? gallery.length - 1 : prev - 1));
+  };
+
+  // ── NEW: Swipe Logic Handlers ──
+  const minSwipeDistance = 50; // Minimum distance (in px) to register as a swipe
+
+  const handleTouchStart = (e) => {
+    setTouchEnd(null); // Reset touch end to prevent false positives
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
+  };
+
+  // Slideshow Timer (Changes image every 4 seconds)
   useEffect(() => {
+    if (gallery.length === 0) return;
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % gallery.length);
+    }, 4000); 
+    return () => clearInterval(timer);
+  }, [gallery, currentSlide]);
+
+  useEffect(() => {
+    // 2. Fetch both Announcements and Gallery images from Sanity
+    const fetchHomeData = async () => {
+      try {
+        const annData = await client.fetch(`*[_type == "announcement"] | order(date desc)[0...5] { _id, title, category, "fileUrl": file.asset->url }`);
+        const galData = await client.fetch(`*[_type == "gallery"] | order(date desc)[0...6] { _id, title, image }`);
+        
+        setAnnouncements(annData || []);
+        setGallery(galData || []);
+      } catch (error) {
+        console.error("Error fetching Sanity data:", error);
+      }
+    };
+    fetchHomeData();
+
     // ── 1. Reveal Animation ──
     const reveals = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries) => {
@@ -119,7 +186,6 @@ export default function Home() {
 
       <nav className="side-panel right" aria-label="Status indicators">
         <span className="side-label">Status</span>
-        {/* FIXED: class to className */}
         <div className="side-track"><div className="side-track-fill" id="rightTrack"></div></div>
         <div className="side-dot"></div>
         <div className="side-dot"></div>
@@ -143,8 +209,8 @@ export default function Home() {
           <p className="hero-sub"></p>
 
           <div className="down-btn-div">
-            <a href="#about_us">
-              <img src="images/Wdown-btn.png" alt="Scroll to About Us" id="downBtnImg" className="down-btn" />
+            <a href="#updates">
+              <img src="images/Wdown-btn.png" alt="Scroll to Updates" id="downBtnImg" className="down-btn" />
             </a>
           </div>
           <div className="hero-ctas"></div>
@@ -154,6 +220,89 @@ export default function Home() {
         <div className="logo-ticker reveal">
           <div className="logo-ticker-label">ELECTRICAL AND ELECTRONICS ENGINEERING, GEC PALAKKAD</div>
         </div>
+
+        <div id="updates"></div>
+
+        {/* ═══ ANNOUNCEMENTS MARQUEE ═══ */}
+        {announcements.length > 0 && (
+          <div className="marquee-container">
+            <div className="marquee-content">
+              <span className="marquee-label">📢 LATEST UPDATES:</span>
+              {announcements.map((item) => (
+                <span key={item._id} className="marquee-item">
+                  <span className="marquee-category">[{item.category || 'General'}]</span>
+                  <a 
+                    href={item.fileUrl ? item.fileUrl : "/announcements"} 
+                    target={item.fileUrl ? "_blank" : "_self"} 
+                    rel="noopener noreferrer"
+                  >
+                    {item.title}
+                  </a>
+                  <span className="marquee-separator">✦</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ═══ TV SLIDESHOW (GALLERY) ═══ */}
+        {gallery.length > 0 && (
+          <section className="section section-center" style={{ paddingTop: '60px', paddingBottom: '20px' }}>
+            <p className="section-tag">Department Highlights</p>
+            <h2 className="section-title" style={{ marginBottom: '40px' }}><strong>CAMPUS GLIMPSES</strong></h2>
+            
+            {/* FIXED: Bound the touch events directly to this container */}
+            <div 
+              className="slideshow-container"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              {gallery.map((img, index) => (
+                <div key={img._id} className={`slide ${index === currentSlide ? 'active' : ''}`}>
+                  {img.image && (
+                    <img src={urlFor(img.image).url()} alt={img.title || "Gallery Image"} />
+                  )}
+                  {img.title && <div className="slide-caption">{img.title}</div>}
+                </div>
+              ))}
+
+              {gallery.length > 1 && (
+                <>
+                  {/* FIXED: Added 'slider-arrow' class so we can hide these on mobile */}
+                  <button 
+                    className="slider-arrow"
+                    onClick={prevSlide}
+                    aria-label="Previous slide"
+                    style={{ 
+                      position: 'absolute', top: '50%', left: '15px', transform: 'translateY(-50%)', 
+                      background: 'rgba(10, 15, 26, 0.6)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', 
+                      borderRadius: '50%', width: '45px', height: '45px', cursor: 'pointer', zIndex: 10, 
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem',
+                      backdropFilter: 'blur(4px)'
+                    }}
+                  >
+                    &#10094;
+                  </button>
+                  <button 
+                    className="slider-arrow"
+                    onClick={nextSlide}
+                    aria-label="Next slide"
+                    style={{ 
+                      position: 'absolute', top: '50%', right: '15px', transform: 'translateY(-50%)', 
+                      background: 'rgba(10, 15, 26, 0.6)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', 
+                      borderRadius: '50%', width: '45px', height: '45px', cursor: 'pointer', zIndex: 10, 
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem',
+                      backdropFilter: 'blur(4px)'
+                    }}
+                  >
+                    &#10095;
+                  </button>
+                </>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* ═══ About Us ═══ */}
         <section className="section" id="about_us">
@@ -179,7 +328,6 @@ export default function Home() {
               <div className="feature-number"></div>
               <p className="section-tag"></p>
               <h2 className="section-title"><strong>MISSION and VISION</strong></h2>
-              {/* FIXED: Swapped <p> to <div> to allow nesting of <ul> */}
               <div className="section-body">
                 <ul>
                   <li>To impart high quality education to meet the challenges in the field of Electrical and Electronics Engineering.</li>
@@ -206,12 +354,9 @@ export default function Home() {
               <div className="pricing-badge">Popular</div>
               <div className="pricing-tier">B.Tech</div>
               <p className="pricing-desc">The Bachelor's of Technology in Electrical and Electronics Engineering (B.Tech in EEE) is a four-year undergraduate program that delves into the design, analysis, and application of electrical and electronic systems. Students gain expertise in power generation and distribution, circuit design, electronics, and control systems.</p>
-              <div className="testimonial-card-details reveal reveal-d1">
-                <div className="testimonial-author">
-                  <p>MORE DETAILS</p>
-                </div>
-              </div>
             </div>
+
+          
           </div>
         </section>
 
@@ -262,7 +407,7 @@ export default function Home() {
                   <div className="integration-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M6 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M9 7h6M9 11h6M9 15h4"/><path d="M8 3v2"/></svg>
                   </div>
-                  <div className="integration-name">Previous year questions</div>
+                  <div className="integration-name">PREVIOUS YEAR QUESTIONS</div>
                 </Link>
 
                 <Link id="linkEvents" className="integration-item" href="/events">

@@ -1,6 +1,6 @@
 export default {
   name: 'academicDoc',
-  title: 'Notes & Syllabus',
+  title: 'Syllabus and PYQs',
   type: 'document',
   fields: [
     { name: 'title', title: 'Document Title', type: 'string' },
@@ -8,7 +8,7 @@ export default {
       name: 'category', 
       title: 'Category', 
       type: 'string',
-      options: { list: ['Notes', 'Syllabus'] }
+      options: { list: ['PYQs', 'Syllabus'] }
     },
     { 
       name: 'semester', 

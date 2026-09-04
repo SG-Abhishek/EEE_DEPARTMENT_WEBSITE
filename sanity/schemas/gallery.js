@@ -3,8 +3,18 @@ export default {
   title: 'Gallery Images',
   type: 'document',
   fields: [
-    { name: 'title', title: 'Caption / Title', type: 'string' },
-    { name: 'date', title: 'Date Taken', type: 'date' },
-    { name: 'image', title: 'Image', type: 'image', options: { hotspot: true } },
+    {
+      name: 'title',
+      title: 'Caption / Title',
+      type: 'string',
+    },
+    {
+      name: 'image',
+      title: 'Upload Image',
+      type: 'image',
+      options: {
+        hotspot: true, // Allows you to crop images in the CMS
+      },
+    }
   ],
 };
