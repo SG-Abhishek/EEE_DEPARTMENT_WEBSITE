@@ -1,5 +1,6 @@
 import './globals.css';
 import Navbar from '../../components/Navbar';
+import { Analytics } from '@vercel/analytics/next';
 
 // This metadata boosts your SEO and shows up on Google/Discord
 export const metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
 
         {/* The current page content loads here */}
         {children}
+        <Analytics />
         
       </body>
     </html>
