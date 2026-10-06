@@ -1,4 +1,4 @@
-import { client } from '@/sanity/lib/client'; // Adjust path if needed
+import { client } from '../../../sanity/lib/client';
 
 export default async function MaterialListPage({ params }) {
   const { scheme, type, semester } = await params;
