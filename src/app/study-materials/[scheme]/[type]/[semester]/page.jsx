@@ -3,14 +3,14 @@ import { client } from '../../../../../../sanity/lib/client';
 export default async function MaterialListPage({ params }) {
   const { scheme, type, semester } = await params;
 
-  // GROQ query fetches documents and expands all files inside each array
+  // GROQ query: asset->url is referenced directly on the file object
   const query = `*[_type == "studyMaterial" && scheme == $scheme && materialType == $type && semester == $semester] | order(_createdAt desc) {
     _id,
     title,
     files[] {
       _key,
       fileTitle,
-      "fileUrl": file.asset->url,
+      "fileUrl": asset->url,
       externalLink
     }
   }`;

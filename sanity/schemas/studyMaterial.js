@@ -59,19 +59,13 @@ export default {
       type: 'array',
       of: [
         {
-          type: 'object',
-          title: 'Document',
+          type: 'file',
+          options: { accept: '.pdf' },
           fields: [
             {
               name: 'fileTitle',
-              title: 'Module / Document Title (e.g., Module 1)',
+              title: 'Module / Custom Title (Optional)',
               type: 'string',
-            },
-            {
-              name: 'file',
-              title: 'PDF File',
-              type: 'file',
-              options: { accept: '.pdf' },
             },
             {
               name: 'externalLink',
