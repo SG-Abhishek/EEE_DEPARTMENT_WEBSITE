@@ -68,6 +68,12 @@ export default {
               type: 'string',
             },
             {
+              name: 'thumbnail',
+              title: 'Custom Thumbnail Cover Image (Optional)',
+              type: 'image',
+              options: { hotspot: true },
+            },
+            {
               name: 'externalLink',
               title: 'External Link (Optional)',
               type: 'url',
@@ -77,10 +83,12 @@ export default {
             select: {
               customTitle: 'fileTitle',
               originalName: 'asset.originalFilename',
+              media: 'thumbnail',
             },
-            prepare({ customTitle, originalName }) {
+            prepare({ customTitle, originalName, media }) {
               return {
                 title: customTitle || originalName || 'PDF Document',
+                media: media,
               };
             },
           },
