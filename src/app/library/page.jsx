@@ -1,6 +1,9 @@
 import { client } from "../../../sanity/lib/client";
 import LibraryClient from "./LibraryClient";
 
+// Force Next.js to fetch fresh data on every page request in production
+export const dynamic = "force-dynamic";
+
 async function getTextbooks() {
   const query = `*[_type == "library"] | order(title asc) {
     _id,
@@ -11,7 +14,7 @@ async function getTextbooks() {
   }`;
 
   try {
-    return await client.fetch(query, {}, { next: { revalidate: 60 } });
+    return await client.fetch(query, {}, { cache: "no-store" });
   } catch (error) {
     console.error("Error fetching textbooks from Sanity:", error);
     return [];
