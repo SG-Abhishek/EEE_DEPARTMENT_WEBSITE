@@ -73,6 +73,17 @@ export default {
               type: 'url',
             },
           ],
+          preview: {
+            select: {
+              customTitle: 'fileTitle',
+              originalName: 'asset.originalFilename',
+            },
+            prepare({ customTitle, originalName }) {
+              return {
+                title: customTitle || originalName || 'PDF Document',
+              };
+            },
+          },
         },
       ],
     },
