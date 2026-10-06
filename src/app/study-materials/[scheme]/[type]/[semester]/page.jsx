@@ -1,9 +1,9 @@
-import { client } from '@/../sanity/lib/client';
+import { client } from '@/sanity/lib/client'; // Adjust path if needed
 
 export default async function MaterialListPage({ params }) {
-  const { scheme, type, year } = await params;
+  const { scheme, type, semester } = await params;
 
-  const query = `*[_type == "studyMaterial" && scheme == $scheme && materialType == $type && academicYear == $year] | order(_createdAt desc) {
+  const query = `*[_type == "studyMaterial" && scheme == $scheme && materialType == $type && semester == $semester] | order(_createdAt desc) {
     _id,
     title,
     "fileUrl": file.asset->url,
@@ -12,16 +12,20 @@ export default async function MaterialListPage({ params }) {
 
   let materials = [];
   try {
-    materials = await client.fetch(query, { scheme, type, year });
+    materials = await client.fetch(query, { scheme, type, semester });
   } catch (error) {
     console.error("Error fetching study materials from Sanity:", error);
   }
 
-  const yearMap = {
-    year1: '1st Year',
-    year2: '2nd Year',
-    year3: '3rd Year',
-    year4: '4th Year',
+  const semesterMap = {
+    s1: 'Semester 1 (S1)',
+    s2: 'Semester 2 (S2)',
+    s3: 'Semester 3 (S3)',
+    s4: 'Semester 4 (S4)',
+    s5: 'Semester 5 (S5)',
+    s6: 'Semester 6 (S6)',
+    s7: 'Semester 7 (S7)',
+    s8: 'Semester 8 (S8)',
   };
 
   const typeTitle = type === 'pyq' ? 'PREVIOUS YEAR QUESTIONS' : 'NOTES';
@@ -30,14 +34,14 @@ export default async function MaterialListPage({ params }) {
     <div style={{ paddingTop: '140px', minHeight: '100vh', paddingLeft: '20px', paddingRight: '20px', paddingBottom: '60px', maxWidth: '900px', margin: '0 auto' }}>
       <div style={{ borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '16px', marginBottom: '32px' }}>
         <h1 style={{ fontSize: '1.6rem', fontWeight: '700', letterSpacing: '1px', color: '#ffffff', textTransform: 'uppercase' }}>
-          {scheme} SCHEME — {typeTitle} ({yearMap[year] || year})
+          {scheme} SCHEME — {typeTitle} ({semesterMap[semester] || semester.toUpperCase()})
         </h1>
       </div>
 
       {materials.length === 0 ? (
         <div style={{ textAlign: 'center', padding: '50px 20px', border: '1px dashed rgba(255,255,255,0.15)', borderRadius: '12px', background: 'rgba(255,255,255,0.02)' }}>
           <p style={{ color: '#888888', fontSize: '1rem' }}>
-            No materials uploaded yet for {scheme} Scheme {yearMap[year] || year} {typeTitle}.
+            No materials uploaded yet for {scheme} Scheme {semesterMap[semester] || semester.toUpperCase()} {typeTitle}.
           </p>
         </div>
       ) : (
