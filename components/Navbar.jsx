@@ -67,7 +67,8 @@ export default function Navbar() {
           <li><Link href="/">HOME</Link></li>
           <li><Link href="/#about_us">ABOUT US</Link></li>
           <li><Link href="/#programs">PROGRAMS</Link></li>
-          <li><Link href="/#more">MORE</Link></li>
+          <li><Link href="/#more">FACULTIES</Link></li>
+          <li><Link href="/#pages">MORE</Link></li>
         </ul>
         <button 
           className={`nav-toggle ${isMenuOpen ? 'active' : ''}`} 
@@ -95,7 +96,8 @@ export default function Navbar() {
             <Link href="/" className="mobile-menu-link" onClick={closeMenu}>HOME</Link>
             <Link href="/#about_us" className="mobile-menu-link" onClick={closeMenu}>ABOUT US</Link>
             <Link href="/#programs" className="mobile-menu-link" onClick={closeMenu}>PROGRAMS</Link>
-            <Link href="/#more" className="mobile-menu-link" onClick={closeMenu}>MORE</Link>
+            <Link href="/#more" className="mobile-menu-link" onClick={closeMenu}>FACULTIES</Link>
+            <Link href="/#pages" className="mobile-menu-link" onClick={closeMenu}>MORE</Link>
           </div>
           <div className="mobile-menu-footer">
             <a href="#" className="mobile-menu-link">Privacy</a>

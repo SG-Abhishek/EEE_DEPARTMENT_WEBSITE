@@ -380,7 +380,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="right">
+            <div className="right" id='pages'>
               <div className="integrations-grid reveal reveal-d3">
                 <Link id="linkSyllabus" className="integration-item" href="/syllabus">
                   <div className="integration-icon">
