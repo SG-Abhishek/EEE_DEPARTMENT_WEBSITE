@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default async function MaterialListPage({ params }) {
   const { scheme, type, semester } = await params;
 
-  // GROQ query fetches custom fileTitle OR the actual uploaded asset filename
+  // GROQ query fetches title, custom fileTitle / originalFilename, and thumbnail URL
   const query = `*[_type == "studyMaterial" && scheme == $scheme && materialType == $type && semester == $semester] | order(_createdAt desc) {
     _id,
     title,
@@ -39,7 +39,7 @@ export default async function MaterialListPage({ params }) {
   const typeTitle = type === 'pyq' ? 'PREVIOUS YEAR QUESTIONS' : 'NOTES';
 
   return (
-    <div style={{ paddingTop: '130px', minHeight: '100vh', paddingLeft: '20px', paddingRight: '20px', paddingBottom: '80px', maxWidth: '960px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
+    <div style={{ paddingTop: '130px', minHeight: '100vh', paddingLeft: '20px', paddingRight: '20px', paddingBottom: '80px', maxWidth: '1100px', margin: '0 auto', width: '100%', boxSizing: 'border-box' }}>
       
       {/* Breadcrumbs */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '20px', flexWrap: 'wrap' }}>
@@ -53,7 +53,7 @@ export default async function MaterialListPage({ params }) {
       </div>
 
       {/* Header Banner */}
-      <div style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.12)', paddingBottom: '20px', marginBottom: '36px' }}>
+      <div style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.12)', paddingBottom: '20px', marginBottom: '32px' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
           <span style={{ backgroundColor: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa', border: '1px solid rgba(59, 130, 246, 0.3)', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.5px' }}>
             {scheme} SCHEME
@@ -67,7 +67,7 @@ export default async function MaterialListPage({ params }) {
         </h1>
       </div>
 
-      {/* Material List */}
+      {/* Subject Sections */}
       {materials.length === 0 ? (
         <div style={{ textAlign: 'center', padding: '60px 20px', border: '1px dashed rgba(255,255,255,0.15)', borderRadius: '16px', background: 'rgba(255,255,255,0.02)' }}>
           <p style={{ color: '#94a3b8', fontSize: '1rem', margin: 0 }}>
@@ -77,18 +77,18 @@ export default async function MaterialListPage({ params }) {
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
           {materials.map((subject) => (
-            <div key={subject._id} style={{ backgroundColor: 'rgba(15, 23, 42, 0.6)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 20px rgba(0,0,0,0.3)' }}>
+            <div key={subject._id} style={{ backgroundColor: 'rgba(15, 23, 42, 0.6)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '16px', padding: '20px', boxShadow: '0 4px 20px rgba(0,0,0,0.3)' }}>
               
-              {/* Subject Title */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '18px', borderBottom: '1px solid rgba(255, 255, 255, 0.06)', paddingBottom: '12px' }}>
+              {/* Subject Heading */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '1px solid rgba(255, 255, 255, 0.06)', paddingBottom: '10px' }}>
                 <div style={{ width: '4px', height: '18px', backgroundColor: '#3b82f6', borderRadius: '2px', flexShrink: 0 }}></div>
-                <h2 style={{ fontSize: '1.25rem', fontWeight: '700', color: '#f8fafc', margin: 0, wordBreak: 'break-word' }}>
+                <h2 style={{ fontSize: '1.2rem', fontWeight: '700', color: '#f8fafc', margin: 0, wordBreak: 'break-word' }}>
                   {subject.title}
                 </h2>
               </div>
 
-              {/* Files Container */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              {/* Compact Files Grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '14px' }}>
                 {subject.files && subject.files.map((item, index) => {
                   const displayName = item.fileTitle || item.originalFilename || `Document ${index + 1}`;
                   const fileTarget = item.fileUrl || item.externalLink;
@@ -96,29 +96,27 @@ export default async function MaterialListPage({ params }) {
                   return (
                     <div 
                       key={item._key || index} 
-                      className="integration-item" 
                       style={{ 
                         display: 'flex', 
-                        justify: 'space-between', 
-                        alignItems: 'center', 
-                        padding: '16px 20px', 
+                        flexDirection: 'column',
+                        justifyContent: 'space-between', 
+                        padding: '14px', 
                         borderRadius: '12px',
                         background: 'rgba(30, 41, 59, 0.5)',
                         border: '1px solid rgba(255, 255, 255, 0.08)',
-                        gap: '16px',
-                        width: '100%',
-                        boxSizing: 'border-box'
+                        gap: '12px',
+                        minHeight: '110px'
                       }}
                     >
-                      {/* Left Side: Icon & Title Box */}
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flex: '1', minWidth: '0' }}>
+                      {/* Thumbnail/Icon + File Name Container */}
+                      <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
                         
-                        {/* Icon / Thumbnail Box (flexShrink: 0 keeps it locked in place) */}
+                        {/* Thumbnail Container (44px x 58px) */}
                         <div style={{ 
                           minWidth: '44px', 
                           width: '44px',
-                          height: '52px', 
-                          borderRadius: '8px', 
+                          height: '58px', 
+                          borderRadius: '6px', 
                           backgroundColor: 'rgba(15, 23, 42, 0.8)', 
                           border: '1px solid rgba(255, 255, 255, 0.12)',
                           display: 'flex', 
@@ -139,69 +137,62 @@ export default async function MaterialListPage({ params }) {
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                                 <polyline points="14 2 14 8 20 8"></polyline>
                               </svg>
+                              <span style={{ fontSize: '0.55rem', fontWeight: '800', marginTop: '2px', letterSpacing: '0.5px' }}>PDF</span>
                             </div>
                           )}
                         </div>
 
-                        {/* Document Name Container */}
-                        <div style={{ display: 'flex', flexDirection: 'column', flex: '1', minWidth: '0' }}>
+                        {/* Text Wrap Container */}
+                        <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0, flex: '1' }}>
                           <span style={{ 
                             color: '#f1f5f9', 
                             fontWeight: '600', 
-                            fontSize: '0.95rem',
-                            lineHeight: '1.4',
+                            fontSize: '0.88rem',
+                            lineHeight: '1.35',
                             wordBreak: 'break-word',
-                            overflowWrap: 'anywhere'
+                            overflowWrap: 'anywhere',
+                            display: '-webkit-box',
+                            WebkitLineClamp: 3,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden'
                           }}>
                             {displayName}
                           </span>
-                          {item.originalFilename && item.fileTitle && (
-                            <span style={{ 
-                              fontSize: '0.78rem', 
-                              color: '#64748b', 
-                              marginTop: '2px', 
-                              wordBreak: 'break-word',
-                              overflowWrap: 'anywhere'
-                            }}>
-                              {item.originalFilename}
-                            </span>
-                          )}
                         </div>
                       </div>
 
-                      {/* Right Side: Button Container */}
-                      <div style={{ flexShrink: 0 }}>
-                        {fileTarget ? (
-                          <a 
-                            href={fileTarget} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            style={{ 
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '8px',
-                              backgroundColor: '#2563eb', 
-                              color: '#ffffff', 
-                              padding: '9px 18px', 
-                              borderRadius: '8px', 
-                              textDecoration: 'none', 
-                              fontSize: '0.85rem', 
-                              fontWeight: '600',
-                              whiteSpace: 'nowrap',
-                              boxShadow: '0 2px 8px rgba(37, 99, 235, 0.3)'
-                            }}
-                          >
-                            <span>View Document</span>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                              <polyline points="15 3 21 3 21 9"></polyline>
-                              <line x1="10" y1="14" x2="21" y2="3"></line>
-                            </svg>
-                          </a>
-                        ) : (
-                          <span style={{ fontSize: '0.8rem', color: '#64748b' }}>No file attached</span>
-                        )}
-                      </div>
+                      {/* View Document Action */}
+                      {fileTarget ? (
+                        <a 
+                          href={fileTarget} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          style={{ 
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '6px',
+                            backgroundColor: '#2563eb', 
+                            color: '#ffffff', 
+                            padding: '7px 12px', 
+                            borderRadius: '6px', 
+                            textDecoration: 'none', 
+                            fontSize: '0.8rem', 
+                            fontWeight: '600',
+                            marginTop: 'auto',
+                            boxShadow: '0 2px 6px rgba(37, 99, 235, 0.25)'
+                          }}
+                        >
+                          <span>View Document</span>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                          </svg>
+                        </a>
+                      ) : (
+                        <span style={{ fontSize: '0.75rem', color: '#64748b', textAlign: 'center' }}>No file attached</span>
+                      )}
 
                     </div>
                   );
