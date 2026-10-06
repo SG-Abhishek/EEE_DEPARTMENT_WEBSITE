@@ -365,6 +365,7 @@ export default function Home() {
         <div className="more">
           <h2 className="section-title-links reveal reveal-d1">______________________________________</h2>
           <section className="section-more section-center" id="more">
+
             <div className="left">
               <div className="integration-item-faculty">
                 <p>HEAD OF THE DEPARTMENT</p>
@@ -388,11 +389,14 @@ export default function Home() {
                   <div className="integration-name">SYLLABUS</div>
                 </Link>
 
-                <Link id="linkNotes" className="integration-item" href="/pyqs">
+                <Link id="linkStudyMaterials" className="integration-item" href="/study-materials">
                   <div className="integration-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M6 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M9 7h6M9 11h6M9 15h4"/><path d="M8 3v2"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
                   </div>
-                  <div className="integration-name">PREVIOUS YEAR QUESTIONS</div>
+                  <div className="integration-name">STUDY MATERIALS</div>
                 </Link>
 
                 <Link id="linkEvents" className="integration-item" href="/events">
@@ -443,8 +447,20 @@ export default function Home() {
                   </div>
                   <div className="integration-name">PLACEMENTS</div>
                 </Link>
+
+                <Link id="linkLibrary" className="integration-item" href="/library">
+                  <div className="integration-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                    </svg>
+                  </div>
+                  <div className="integration-name">LIBRARY</div>
+                </Link>
+
               </div>
             </div>
+            
           </section>
         </div>
 

@@ -971,30 +971,65 @@ body.syllabus-body { min-height: 100vh; height: auto; overflow-y: auto; }
 .main { position: relative; z-index: 10; max-width: 1120px; margin: 0 auto; padding: 0 40px; width: 100%; display: block; }
 
 /* 2. Fix the "MORE" Section Alignment */
-.more { width: 100%; margin: 0 auto; }
-.section-more { display: flex; flex-direction: row; justify-content: space-between; align-items: stretch; width: 100%; gap: 4%; }
+.more { 
+  width: 100%; 
+  margin: 0 auto; 
+}
 
-/* 3. Lock in Column Widths & Vertical Centering */
-#more .left { width: 36%; display: flex; flex-direction: column; }
-#more .right { width: 60%; display: flex; flex-direction: column; justify-content: center; }
+.section-more { 
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-between; 
+  align-items: flex-start; /* Keeps HOD card height independent from the grid */
+  width: 100%; 
+  gap: 3%; 
+}
+
+/* 3. Column Widths (1/3 : 2/3 Section Ratio) */
+#more .left { 
+  width: 32%; /* Increased from 24% to give HOD card proper width */
+  display: flex; 
+  flex-direction: column; 
+}
+
+#more .right { 
+  width: 65%; /* 32% Left + 65% Right + 3% Gap = 100% */
+  display: flex; 
+  flex-direction: column; 
+}
 
 /* 4. The Grid Container */
 .right .integrations-grid {
-  margin-top: 0 !important; display: grid !important;
+  margin-top: 0 !important; 
+  display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 16px !important; width: 100% !important; height: auto !important;
+  gap: 16px !important; 
+  width: 100% !important; 
+  height: auto !important;
 }
 
-/* 5. The Grid Buttons */
+/* 5. Reduced Height Grid Buttons */
 .right .integrations-grid .integration-item {
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  padding: 24px 12px; gap: 16px; aspect-ratio: 4 / 3; height: auto; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
+  padding: 14px 10px; 
+  gap: 8px; 
+  aspect-ratio: 16 / 10; 
+  height: auto; 
 }
 
 /* 6. HOD Card Scaling */
 #more .left .integration-item-faculty {
-  width: 100%; height: 100%; margin: 0; padding: 32px 20px; box-sizing: border-box;
-  display: flex; flex-direction: column; justify-content: space-between;
+  width: 100%; 
+  height: auto; 
+  margin: 0; 
+  padding: 24px 20px; 
+  box-sizing: border-box;
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between;
 }
 
 /* 7. Mobile Responsiveness */

@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       {/* We apply syllabus-body globally to keep your original dark theme background */}
       <body className="syllabus-body">
         

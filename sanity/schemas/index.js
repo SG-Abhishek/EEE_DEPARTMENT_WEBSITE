@@ -5,13 +5,17 @@ import gallery from './gallery';
 import placement from './placement';
 import project from './project';
 import academicDoc from './academicDoc';
+import library from './library';  
+import studyMaterial from './studyMaterial';
 
 export const schemaTypes = [
-  announcement, 
-  faculty, 
-  event, 
-  gallery, 
-  placement, 
-  project, 
-  academicDoc
+  announcement,
+  studyMaterial,
+  faculty,
+  event,
+  gallery,
+  placement,
+  project,
+  academicDoc,
+  library, 
 ];
