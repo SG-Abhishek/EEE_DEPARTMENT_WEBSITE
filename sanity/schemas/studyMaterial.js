@@ -5,7 +5,7 @@ export default {
   fields: [
     {
       name: 'title',
-      title: 'Title',
+      title: 'Subject / Topic Name (e.g., Ethics in Engineering)',
       type: 'string',
       validation: (Rule) => Rule.required(),
     },
@@ -54,17 +54,33 @@ export default {
       validation: (Rule) => Rule.required(),
     },
     {
-      name: 'file',
-      title: 'PDF File',
-      type: 'file',
-      options: {
-        accept: '.pdf',
-      },
-    },
-    {
-      name: 'externalLink',
-      title: 'External Link (Drive / Dropbox)',
-      type: 'url',
+      name: 'files',
+      title: 'PDF Files / Modules (Batch Upload)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          title: 'Document',
+          fields: [
+            {
+              name: 'fileTitle',
+              title: 'Module / Document Title (e.g., Module 1)',
+              type: 'string',
+            },
+            {
+              name: 'file',
+              title: 'PDF File',
+              type: 'file',
+              options: { accept: '.pdf' },
+            },
+            {
+              name: 'externalLink',
+              title: 'External Link (Optional)',
+              type: 'url',
+            },
+          ],
+        },
+      ],
     },
   ],
 };

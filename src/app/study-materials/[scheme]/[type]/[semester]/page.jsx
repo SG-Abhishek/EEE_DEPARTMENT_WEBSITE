@@ -3,11 +3,16 @@ import { client } from '../../../../../../sanity/lib/client';
 export default async function MaterialListPage({ params }) {
   const { scheme, type, semester } = await params;
 
+  // GROQ query fetches documents and expands all files inside each array
   const query = `*[_type == "studyMaterial" && scheme == $scheme && materialType == $type && semester == $semester] | order(_createdAt desc) {
     _id,
     title,
-    "fileUrl": file.asset->url,
-    externalLink
+    files[] {
+      _key,
+      fileTitle,
+      "fileUrl": file.asset->url,
+      externalLink
+    }
   }`;
 
   let materials = [];
@@ -45,31 +50,43 @@ export default async function MaterialListPage({ params }) {
           </p>
         </div>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {materials.map((item) => (
-            <div 
-              key={item._id} 
-              className="integration-item" 
-              style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '18px 24px', textDecoration: 'none' }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div className="integration-icon" style={{ minWidth: '36px', height: '36px', marginBottom: 0 }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                  </svg>
-                </div>
-                <span style={{ color: '#ffffff', fontWeight: '500', fontSize: '1rem' }}>{item.title}</span>
-              </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+          {materials.map((subject) => (
+            <div key={subject._id} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: '600', color: '#60a5fa', letterSpacing: '0.5px' }}>
+                {subject.title}
+              </h2>
 
-              <a 
-                href={item.fileUrl || item.externalLink} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: '#ffffff', padding: '8px 18px', borderRadius: '8px', textDecoration: 'none', fontSize: '0.85rem', fontWeight: '600', border: '1px solid rgba(255,255,255,0.2)' }}
-              >
-                View / Download
-              </a>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {subject.files && subject.files.map((item, index) => (
+                  <div 
+                    key={item._key || index} 
+                    className="integration-item" 
+                    style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', textDecoration: 'none' }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      <div className="integration-icon" style={{ minWidth: '32px', height: '32px', marginBottom: 0 }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                          <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                      </div>
+                      <span style={{ color: '#ffffff', fontWeight: '500', fontSize: '0.95rem' }}>
+                        {item.fileTitle || `Document ${index + 1}`}
+                      </span>
+                    </div>
+
+                    <a 
+                      href={item.fileUrl || item.externalLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: '#ffffff', padding: '6px 16px', borderRadius: '6px', textDecoration: 'none', fontSize: '0.85rem', fontWeight: '600', border: '1px solid rgba(255,255,255,0.2)' }}
+                    >
+                      View / Download
+                    </a>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
