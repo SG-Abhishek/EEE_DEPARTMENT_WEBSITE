@@ -204,7 +204,7 @@ export default function Home() {
             <span>Welcome to the Department of</span>
           </div>
           <h1 className="h1-large">ELECTRICAL ENGINEERING<br/><em></em></h1>
-          <h1 className="h1-small">ELECTRICAL<br/> AND <br/>ELECTRONICS <br/>ENGINEERING<br/><em></em></h1>
+          <h1 className="h1-small">ELECTRICAL ENGINEERING<br/><em></em></h1>
           <span className="pkd-card">GEC PALAKKAD</span>
           <p className="hero-sub"></p>
 
