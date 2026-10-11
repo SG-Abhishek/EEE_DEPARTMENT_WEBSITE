@@ -1,11 +1,12 @@
 // app/layout.js
 import './globals.css';
 import Navbar from '../../components/Navbar';
-import Script from 'next/script'; // Import Script component
+import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata = {
   title: 'EEE Department | GEC Palakkad',
-  description: 'Welcome to the Department of Electrical and Electronics Engineering at Government Engineering College Sreekrishnapuram, Palakkad.',
+  description: 'Welcome to the Department of Electrical and Electronics Engineering at Government Engineering College Sreekrishnapuram, Palakkad[cite: 12].',
   manifest: '/manifest.json',
   icons: {
     icon: [
@@ -37,6 +38,9 @@ export default function RootLayout({ children }) {
       <body className="syllabus-body">
         <Navbar />
         {children}
+
+        {/* Vercel Web Analytics */}
+        <Analytics />
 
         {/* Registers public/sw.js on page load */}
         <Script id="register-sw" strategy="afterInteractive">
